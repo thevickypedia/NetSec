@@ -80,7 +80,7 @@ class LocalIPScan:
         """Creates a snapshot.yml which is used to determine the known and unknown devices."""
         logger.warning(f"Creating a snapshot will capture the current list of devices connected to {self.ssid} at"
                        " this moment. This capture will be used to alert/block when new devices are connected. So, "
-                       f"please review the {self.snapshot} manually and remove the devices that you don't recognize.")
+                       f"please review the {self.snapshot} manually and remove the devices that's not recognized.")
         with open(self.snapshot, 'w') as file:
             for device in self.get_devices():
                 file.write(f'{device.name}\n')
