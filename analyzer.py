@@ -173,6 +173,39 @@ class LocalIPScan:
         else:
             self.dump_blocked(device=device)
 
+    def always_allow(self, device: str or Device) -> None:
+        """Allows internet access to a device.
+        Saves the device name to ``snapshot.yml`` to not block in future.
+        Removes the device name from ``blocked.yml`` if an entry is present.
+
+        Args:
+            device: Takes device name or Device object as an argument
+        """
+        if isinstance(device, Device):
+            device = device.name  # converts Device object to string
+        device_obj = self.allow(device=device)  # converts string to Device object
+        if not device_obj:
+            return
+
+        with open(self.snapshot, 'r+') as file:
+            if device in file.read().splitlines():
+                logger.info(f'{device} is a part of allow list.')
+            else:
+                file.write(f'{device}\n')
+                logger.info(f'Added {device} to {self.snapshot}')
+
+        with open(self.blocked, 'r+') as file:
+            blocked_devices = load(file, Loader=FullLoader)
+            if blocked_devices:
+                for epoch, device_info in list(blocked_devices.items()):  # convert to a list of dict
+                    if device_info.get('mac') == device_obj.mac:
+                        logger.info(f'Removing {device} from {self.blocked}')
+                        del blocked_devices[epoch]
+                file.seek(0)
+                file.truncate()
+                if blocked_devices:
+                    dump(blocked_devices, file, allow_unicode=True, default_flow_style=False, sort_keys=False)
+
     def run(self):
         """Trigger to initiate a Network Scan and block the devices that are not present in ``snapshot.yml`` file."""
         if not path.isfile(self.snapshot):
