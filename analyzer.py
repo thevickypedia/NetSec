@@ -3,13 +3,13 @@ from importlib import reload
 from os import environ, path
 from pathlib import PurePath
 from platform import system
-from subprocess import Popen, PIPE, check_output
+from subprocess import PIPE, Popen, check_output
 from time import time
 from typing import Union
 
 from dotenv import load_dotenv
-from pynetgear import Netgear, Device
-from yaml import dump, load, FullLoader
+from pynetgear import Device, Netgear
+from yaml import FullLoader, dump, load
 
 reload(logging)
 logger = logging.getLogger(PurePath(__file__).stem)
@@ -23,7 +23,7 @@ logger.setLevel(level=logging.INFO)
 logger.addHandler(hdlr=handler)
 
 
-def ssid():
+def ssid() -> str:
     """Checks the current operating system and runs the appropriate command to get the SSID of the access point.
 
     Returns:
@@ -48,11 +48,14 @@ def ssid():
 
 class LocalIPScan:
     """Connector to scan devices in the same IP range using ``Netgear API``.
+
     >>> LocalIPScan
+
     """
 
     def __init__(self, router_pass: str = None):
         """Gets local host devices connected to the same network range.
+
         Args:
             router_pass: Password to authenticate the API client.
         """
@@ -60,7 +63,7 @@ class LocalIPScan:
         load_dotenv(dotenv_path=env_file_path)
         if not router_pass:
             if not (router_pass := environ.get('router_pass')):
-                raise ValueError(f'Router password is required.')
+                raise ValueError('Router password is required.')
         self.ssid = ssid()
         self.snapshot = 'snapshot.yml'
         self.blocked = 'blocked.yml'
@@ -153,6 +156,7 @@ class LocalIPScan:
 
     def stasher(self, device: Device) -> None:
         """Checks the ``blocked.yml`` file for an existing record of the same device.
+
         If so, logs else calls ``dump_blocked()`` method.
 
         Args:
@@ -175,6 +179,7 @@ class LocalIPScan:
 
     def always_allow(self, device: str or Device) -> None:
         """Allows internet access to a device.
+
         Saves the device name to ``snapshot.yml`` to not block in future.
         Removes the device name from ``blocked.yml`` if an entry is present.
 
