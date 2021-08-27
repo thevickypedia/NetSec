@@ -8,6 +8,14 @@ Wi-Fi.
 
 Block IP Address feature helps the user to remove the specified connections and block the specific IP address.
 
+### Docker Setup:
+
+###### Commands:
+- `docker build --progress plain -t netscan .`
+- `docker run netscan`
+
+[Additional options that can be added to the `docker build` command.](https://docs.docker.com/engine/reference/commandline/build/#options)
+
 ###### [Reference](https://github.com/MatMaul/pynetgear)
 
 ###### [Runbook](https://thevickypedia.github.io/netscan/)
