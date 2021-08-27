@@ -1,5 +1,6 @@
 import logging
 from importlib import reload
+from json import dumps
 from os import environ, path
 from pathlib import PurePath
 from platform import system
@@ -8,6 +9,7 @@ from time import time
 from typing import Union
 
 from dotenv import load_dotenv
+from gmailconnector.send_sms import Messenger
 from pynetgear import Device, Netgear
 from yaml import FullLoader, dump, load
 
@@ -61,10 +63,14 @@ class LocalIPScan:
         """
         env_file_path = '.env'
         load_dotenv(dotenv_path=env_file_path)
+        self.gmail_user = environ.get('gmail_user')
+        self.gmail_pass = environ.get('gmail_pass')
+        self.phone = environ.get('phone')
+        self.subject = 'Firewall Alert'
         if not router_pass:
             if not (router_pass := environ.get('router_pass')):
                 raise ValueError('Router password is required.')
-        self.ssid = ssid()
+        self.ssid = ssid() or 'your WiFi Network.'
         self.snapshot = 'snapshot.yml'
         self.blocked = 'blocked.yml'
         self.netgear = Netgear(password=router_pass)
@@ -102,7 +108,7 @@ class LocalIPScan:
             if device.name == name:
                 return device
 
-    def allow(self, device: str or Device) -> Union[Device, None]:
+    def allow(self, device: Union[str, Device]) -> Union[Device, None]:
         """Allows internet access to a device.
 
         Args:
@@ -211,13 +217,29 @@ class LocalIPScan:
                 if blocked_devices:
                     dump(blocked_devices, file, allow_unicode=True, default_flow_style=False, sort_keys=False)
 
-    def run(self):
+    def send_sms(self, msg) -> None:
+        """Sens an SMS notification when invoked by the ``run`` method.
+
+        Args:
+            msg: Message that has to be sent.
+        """
+        if self.gmail_user and self.gmail_pass and self.phone:
+            response = Messenger(gmail_user=self.gmail_user, gmail_pass=self.gmail_pass,
+                                 phone_number=self.phone, subject=self.subject, message=msg)
+            response = response.send_sms()
+            if response.get('ok'):
+                logger.info(f'Firewall alert has been sent to {self.phone}')
+            else:
+                logger.error(f"Failed to send a notification.\n{response.get('body')}")
+
+    def run(self) -> None:
         """Trigger to initiate a Network Scan and block the devices that are not present in ``snapshot.yml`` file."""
         if not path.isfile(self.snapshot):
             logger.error(f'{self.snapshot} not found. Please run `LocalIPScan().create_snapshot()` and review it.')
             raise FileNotFoundError(f'{self.snapshot} is required ')
         with open(self.snapshot) as file:
             device_list = file.read().splitlines()
+        threat = {}
         for device in self.get_devices():
             if device.name not in device_list:
                 logger.warning(f'{device.name} with MAC address {device.mac} and a signal strength of {device.signal}% '
@@ -225,10 +247,15 @@ class LocalIPScan:
 
                 if device.allow_or_block == 'Allow':
                     self.block(device=device)
+                    threat.update({device.name: device.mac})
                 else:
                     logger.info(f'{device.name} does not have internet access.')
 
                 self.stasher(device=device)
+        if threat:
+            self.send_sms(msg=dumps(threat).removeprefix('{').removesuffix('}').replace('"', ''))
+        else:
+            logger.info(f'NetScan has completed. No threats found on {self.ssid}')
 
 
 if __name__ == '__main__':

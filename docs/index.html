@@ -66,7 +66,7 @@
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="analyzer.LocalIPScan.allow">
-<span class="sig-name descname"><span class="pre">allow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">pynetgear.Device</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#analyzer.LocalIPScan.allow" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">allow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">pynetgear.Device</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">pynetgear.Device</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#analyzer.LocalIPScan.allow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows internet access to a device.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -161,8 +161,19 @@ Removes the device name from <code class="docutils literal notranslate"><span cl
 
 <dl class="py method">
 <dt class="sig sig-object py" id="analyzer.LocalIPScan.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#analyzer.LocalIPScan.run" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#analyzer.LocalIPScan.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Trigger to initiate a Network Scan and block the devices that are not present in <code class="docutils literal notranslate"><span class="pre">snapshot.yml</span></code> file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="analyzer.LocalIPScan.send_sms">
+<span class="sig-name descname"><span class="pre">send_sms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#analyzer.LocalIPScan.send_sms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sens an SMS notification when invoked by the <code class="docutils literal notranslate"><span class="pre">run</span></code> method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>msg</strong> – Message that has to be sent.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
