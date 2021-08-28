@@ -2,3 +2,8 @@ pynetgear==0.7.0
 python_dotenv==0.19.0
 PyYAML==5.4.1
 gmail-connector
+pytz==2021.1
+python-dotenv==0.19.0
+Sphinx==4.1.2
+recommonmark==0.7.1
+pre-commit==2.14.0

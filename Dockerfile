@@ -1,5 +1,7 @@
 FROM python:3.9-slim
 
+ENV DOCKER=1
+
 RUN mkdir /opt/netscan
 COPY . /opt/netscan
 

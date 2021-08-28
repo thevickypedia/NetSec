@@ -1,16 +1,18 @@
 import logging
+from datetime import datetime
 from importlib import reload
 from json import dumps
 from os import environ, path
 from pathlib import PurePath
 from platform import system
 from subprocess import PIPE, Popen, check_output
-from time import time
+from time import struct_time, time
 from typing import Union
 
 from dotenv import load_dotenv
 from gmailconnector.send_sms import Messenger
 from pynetgear import Device, Netgear
+from pytz import timezone, utc
 from yaml import FullLoader, dump, load
 
 reload(logging)
@@ -23,6 +25,25 @@ handler = logging.StreamHandler()
 handler.setFormatter(fmt=log_formatter)
 logger.setLevel(level=logging.INFO)
 logger.addHandler(hdlr=handler)
+
+
+def custom_time(*args: logging.Formatter or time) -> struct_time:
+    """Creates custom timezone for ``logging`` which gets used only when invoked by ``Docker``.
+
+    This is used only when triggered within a ``docker container`` as it uses UTC timezone.
+
+    Args:
+        *args: Takes ``Formatter`` object and current epoch time as arguments passed by ``formatTime`` from ``logging``.
+
+    Returns:
+        struct_time:
+        A struct_time object which is a tuple of:
+        **current year, month, day, hour, minute, second, weekday, year day and dst** *(Daylight Saving Time)*
+    """
+    utc_dt = utc.localize(datetime.utcnow())
+    my_tz = timezone("US/Central")
+    converted = utc_dt.astimezone(my_tz)
+    return converted.timetuple()
 
 
 def ssid() -> str:
@@ -128,7 +149,7 @@ class LocalIPScan:
         self.netgear.allow_block_device(mac_addr=device.mac, device_status='Allow')
         return device
 
-    def block(self, device: str or Device) -> Union[Device, None]:
+    def block(self, device: Device or str) -> Union[Device, None]:
         """Blocks internet access to a device.
 
         Args:
@@ -183,7 +204,7 @@ class LocalIPScan:
         else:
             self.dump_blocked(device=device)
 
-    def always_allow(self, device: str or Device) -> None:
+    def always_allow(self, device: Device or str) -> None:
         """Allows internet access to a device.
 
         Saves the device name to ``snapshot.yml`` to not block in future.
@@ -259,4 +280,6 @@ class LocalIPScan:
 
 
 if __name__ == '__main__':
+    if environ.get('DOCKER'):
+        logging.Formatter.converter = custom_time
     LocalIPScan().run()
