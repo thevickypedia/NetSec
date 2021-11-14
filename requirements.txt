@@ -1,7 +1,7 @@
 pynetgear==0.7.0
 python_dotenv==0.19.0
 PyYAML==5.4.1
-gmail-connector
+gmail-connector>=0.3.6
 pytz==2021.1
 python-dotenv==0.19.0
 Sphinx==4.1.2

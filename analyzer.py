@@ -246,12 +246,11 @@ class LocalIPScan:
         """
         if self.gmail_user and self.gmail_pass and self.phone:
             response = Messenger(gmail_user=self.gmail_user, gmail_pass=self.gmail_pass,
-                                 phone_number=self.phone, subject=self.subject, message=msg)
-            response = response.send_sms()
-            if response.get('ok'):
+                                 phone_number=self.phone, subject=self.subject, message=msg).send_sms()
+            if response.ok:
                 logger.info(f'Firewall alert has been sent to {self.phone}')
             else:
-                logger.error(f"Failed to send a notification.\n{response.get('body')}")
+                logger.error(f"Failed to send a notification.\n{response.body}")
 
     def run(self) -> None:
         """Trigger to initiate a Network Scan and block the devices that are not present in ``snapshot.yml`` file."""
