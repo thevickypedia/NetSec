@@ -26,7 +26,7 @@ LOGGER.setLevel(level=logging.INFO)
 LOGGER.addHandler(hdlr=handler)
 
 
-def _custom_time(*args: logging.Formatter or time.time) -> time.struct_time:
+def custom_time(*args: logging.Formatter or time.time) -> time.struct_time:
     """Creates custom timezone for ``logging`` which gets used only when invoked by ``Docker``.
 
     This is used only when triggered within a ``docker container`` as it uses UTC timezone.
@@ -44,7 +44,7 @@ def _custom_time(*args: logging.Formatter or time.time) -> time.struct_time:
     return datetime.now().astimezone(tz=local_timezone).timetuple()
 
 
-def _extract_str(input_: AnyStr) -> str:
+def extract_str(input_: AnyStr) -> str:
     """Extracts strings from the received input.
 
     Args:
@@ -57,15 +57,16 @@ def _extract_str(input_: AnyStr) -> str:
     return "".join([i for i in input_ if not i.isdigit() and i not in [",", ".", "?", "-", ";", "!", ":"]]).strip()
 
 
-def _device_name():
+def device_name() -> str:
+    """Gets the device name for MacOS and Windows."""
     if platform.system() == 'Darwin':
         system_kernel = subprocess.check_output("sysctl hw.model", shell=True).decode('utf-8').splitlines()
-        return _extract_str(system_kernel[0].split(':')[1])
+        return extract_str(system_kernel[0].split(':')[1])
     elif platform.system() == 'Windows':
         return subprocess.getoutput("WMIC CSPRODUCT GET VENDOR").replace('Vendor', '').strip()
 
 
-def _get_ssid() -> Union[str, None]:
+def get_ssid() -> Union[str, None]:
     """Checks the current operating system and runs the appropriate command to get the SSID of the access point.
 
     Returns:
@@ -79,7 +80,7 @@ def _get_ssid() -> Union[str, None]:
         )
         out, err = process.communicate()
         if out.decode(encoding='UTF-8').strip() == "AirPort: Off":
-            LOGGER.warning(f"{_device_name()} WiFi is turned off.")
+            LOGGER.warning(f"{device_name()} WiFi is turned off.")
             return
         if error := process.returncode:
             LOGGER.error(f"Failed to fetch SSID with exit code: {error}\n{err}")
@@ -94,7 +95,7 @@ def _get_ssid() -> Union[str, None]:
                 return info.strip('SSID').replace('SSID', '').replace(':', '').strip()
 
 
-def _send_sms(msg: str) -> NoReturn:
+def send_sms(msg: str) -> NoReturn:
     """Sens an SMS notification when invoked by the ``run`` method.
 
     Args:
@@ -130,7 +131,7 @@ class LocalIPScan:
                 raise ValueError(
                     'Router password is required.'
                 )
-        self.ssid = _get_ssid() or 'your Network.'
+        self.ssid = get_ssid() or 'your Network.'
         self.snapshot = 'snapshot.json'
         self.blocked = 'blocked.yaml'
         self.netgear = Netgear(password=router_pass)
@@ -311,12 +312,12 @@ class LocalIPScan:
                     LOGGER.info(f'{device.name} does not have internet access.')
 
         if threat:
-            _send_sms(msg=threat)
+            send_sms(msg=threat)
         else:
             LOGGER.info(f'NetScan has completed. No threats found on {self.ssid}')
 
 
 if __name__ == '__main__':
     if os.environ.get('DOCKER'):
-        logging.Formatter.converter = _custom_time
+        logging.Formatter.converter = custom_time
     LocalIPScan().run()
