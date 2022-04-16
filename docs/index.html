@@ -81,10 +81,10 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="analyzer.LocalIPScan.always_allow">
-<span class="sig-name descname"><span class="pre">always_allow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pynetgear.Device</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#analyzer.LocalIPScan.always_allow" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">always_allow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pynetgear.Device</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="headerlink" href="#analyzer.LocalIPScan.always_allow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows internet access to a device.</p>
-<p>Saves the device name to <code class="docutils literal notranslate"><span class="pre">snapshot.yml</span></code> to not block in future.
-Removes the device name from <code class="docutils literal notranslate"><span class="pre">blocked.yml</span></code> if an entry is present.</p>
+<p>Saves the device name to <code class="docutils literal notranslate"><span class="pre">snapshot.json</span></code> to not block in future.
+Removes the device name from <code class="docutils literal notranslate"><span class="pre">blocked.json</span></code> if an entry is present.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>device</strong> – Takes device name or Device object as an argument</p>
@@ -94,7 +94,7 @@ Removes the device name from <code class="docutils literal notranslate"><span cl
 
 <dl class="py method">
 <dt class="sig sig-object py" id="analyzer.LocalIPScan.block">
-<span class="sig-name descname"><span class="pre">block</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pynetgear.Device</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">pynetgear.Device</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#analyzer.LocalIPScan.block" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">block</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">pynetgear.Device</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">pynetgear.Device</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#analyzer.LocalIPScan.block" title="Permalink to this definition">¶</a></dt>
 <dd><p>Blocks internet access to a device.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -111,114 +111,16 @@ Removes the device name from <code class="docutils literal notranslate"><span cl
 
 <dl class="py method">
 <dt class="sig sig-object py" id="analyzer.LocalIPScan.create_snapshot">
-<span class="sig-name descname"><span class="pre">create_snapshot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#analyzer.LocalIPScan.create_snapshot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a snapshot.yml which is used to determine the known and unknown devices.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="analyzer.LocalIPScan.dump_blocked">
-<span class="sig-name descname"><span class="pre">dump_blocked</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pynetgear.Device</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#analyzer.LocalIPScan.dump_blocked" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts device object to a dictionary and dumps it into <code class="docutils literal notranslate"><span class="pre">blocked.yml</span></code> file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>device</strong> – Takes Device object as an argument.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="analyzer.LocalIPScan.get_device_by_name">
-<span class="sig-name descname"><span class="pre">get_device_by_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pynetgear.Device</span></span></span><a class="headerlink" href="#analyzer.LocalIPScan.get_device_by_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calls the <code class="docutils literal notranslate"><span class="pre">get_devices()</span></code> method and checks if the given device is available in the list.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>name</strong> – Takes device name as argument.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Returns device information as a Device object.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Device</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="analyzer.LocalIPScan.get_devices">
-<span class="sig-name descname"><span class="pre">get_devices</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pynetgear.Device</span></span></span><a class="headerlink" href="#analyzer.LocalIPScan.get_devices" title="Permalink to this definition">¶</a></dt>
-<dd><p>Scans the Netgear router for connected devices and the devices’ information.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Returns list of devices connected to the router and the connection information.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>Device</p>
-</dd>
-</dl>
+<span class="sig-name descname"><span class="pre">create_snapshot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="headerlink" href="#analyzer.LocalIPScan.create_snapshot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a snapshot.json which is used to determine the known and unknown devices.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="analyzer.LocalIPScan.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#analyzer.LocalIPScan.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Trigger to initiate a Network Scan and block the devices that are not present in <code class="docutils literal notranslate"><span class="pre">snapshot.yml</span></code> file.</p>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">block</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="headerlink" href="#analyzer.LocalIPScan.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trigger to initiate a Network Scan and block the devices that are not present in <code class="docutils literal notranslate"><span class="pre">snapshot.json</span></code> file.</p>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="analyzer.LocalIPScan.send_sms">
-<span class="sig-name descname"><span class="pre">send_sms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#analyzer.LocalIPScan.send_sms" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sens an SMS notification when invoked by the <code class="docutils literal notranslate"><span class="pre">run</span></code> method.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>msg</strong> – Message that has to be sent.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="analyzer.LocalIPScan.stasher">
-<span class="sig-name descname"><span class="pre">stasher</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pynetgear.Device</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#analyzer.LocalIPScan.stasher" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks the <code class="docutils literal notranslate"><span class="pre">blocked.yml</span></code> file for an existing record of the same device.</p>
-<p>If so, logs else calls <code class="docutils literal notranslate"><span class="pre">dump_blocked()</span></code> method.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>device</strong> – Takes Device object as an argument.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="analyzer.custom_time">
-<span class="sig-prename descclassname"><span class="pre">analyzer.</span></span><span class="sig-name descname"><span class="pre">custom_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">logging.Formatter</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">time.struct_time</span></span></span><a class="headerlink" href="#analyzer.custom_time" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates custom timezone for <code class="docutils literal notranslate"><span class="pre">logging</span></code> which gets used only when invoked by <code class="docutils literal notranslate"><span class="pre">Docker</span></code>.</p>
-<p>This is used only when triggered within a <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">container</span></code> as it uses UTC timezone.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>*args</strong> – Takes <code class="docutils literal notranslate"><span class="pre">Formatter</span></code> object and current epoch time as arguments passed by <code class="docutils literal notranslate"><span class="pre">formatTime</span></code> from <code class="docutils literal notranslate"><span class="pre">logging</span></code>.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A struct_time object which is a tuple of:
-<strong>current year, month, day, hour, minute, second, weekday, year day and dst</strong> <em>(Daylight Saving Time)</em></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>struct_time</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="analyzer.ssid">
-<span class="sig-prename descclassname"><span class="pre">analyzer.</span></span><span class="sig-name descname"><span class="pre">ssid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#analyzer.ssid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks the current operating system and runs the appropriate command to get the SSID of the access point.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>SSID of the access point/router which is being accessed.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
 </dd></dl>
 
 </section>
