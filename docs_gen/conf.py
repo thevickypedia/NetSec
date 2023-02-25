@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.abspath('..'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'NetScan'
+project = 'NetSec'
 copyright = '2021, Vignesh Sivanandha Rao'
 author = 'Vignesh Sivanandha Rao'
 

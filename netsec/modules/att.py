@@ -8,8 +8,8 @@ import pandas
 import requests
 from pandas import DataFrame
 
-from modules.helper import notify
-from modules.settings import LOGGER, config
+from netsec.modules.helper import notify
+from netsec.modules.settings import LOGGER, config
 
 SOURCE = "http://{NETWORK_ID}.254/cgi-bin/devices.ha"
 
@@ -73,7 +73,10 @@ def generate_dataframe() -> DataFrame:
     else:
         if response.ok:
             html_source = response.text
-            html_tables = pandas.read_html(html_source)
+            try:
+                html_tables = pandas.read_html(html_source)
+            except ImportError:
+                raise ValueError("No tables found")
             return html_tables[0]
         else:
             LOGGER.error("[%s] - %s" % (response.status_code, response.text))
@@ -122,23 +125,22 @@ def create_snapshot() -> NoReturn:
 def run() -> NoReturn:
     """Trigger to initiate a Network Scan and block the devices that are not present in ``snapshot.json`` file."""
     if not os.path.isfile(config.snapshot):
-        LOGGER.error("'%s' not found. Please run `create_snapshot()` and review it." % config.snapshot)
+        LOGGER.error("'%s' not found. Please pass `init=True` to generate snapshot and review it." % config.snapshot)
         raise FileNotFoundError(
             "'%s' is required" % config.snapshot
         )
     with open(config.snapshot) as file:
         device_list = json.load(file)
     stored_ips = list(device_list.keys())
-    threat = ''
+    threats = []
     for device in get_attached_devices():
         if device.ipv4_address and device.ipv4_address not in stored_ips:
-            # SOURCE = "http://{NETWORK_ID}.254/cgi-bin/devices.ha"
+            # REMOTE = "http://{NETWORK_ID}.254/cgi-bin/remoteaccess.ha"
             LOGGER.warning('{name} [{ip}: {mac}] is connected to your network.'.format(name=device.name,
                                                                                        mac=device.mac_address,
                                                                                        ip=device.ipv4_address))
-            threat += '\nName: {name}\nIP: {ip}\nMAC: {mac}'.format(name=device.name, mac=device.mac_address,
-                                                                    ip=device.ipv4_address)
-    if threat:
-        notify(msg=threat)
+            threats.append(dict(Name=device.name, MAC=device.mac_address.upper(), IP=device.ipv4_address))
+    if threats:
+        notify(msg_dict=threats)
     else:
-        LOGGER.info('NetScan has completed. No threats found on your network.')
+        LOGGER.info('NetSec has completed. No threats found on your network.')

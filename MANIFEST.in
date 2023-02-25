@@ -1,0 +1,5 @@
+global-exclude .env
+global-exclude *.yaml
+global-exclude *.json
+global-exclude .DS_Store
+recursive-include netsec/modules *

@@ -1,6 +1,20 @@
 Release Notes
 =============
 
+0.1.7 (02/25/2023)
+------------------
+- Make `NetSec` pip installable
+- Do not repeat notifications in under an hour
+- Onboard github actions to deploy to pypi
+- Update .gitignore, README.md and release_notes.rst
+
+0.1.6 (02/24/2023)
+------------------
+- Support `AT&T` networks
+- Restructure code to improve speed and usability
+- Update README.md, docs and requirements.txt
+- Remove Dockerfile
+
 0.1.5 (04/16/2022)
 ------------------
 - Update docstrings

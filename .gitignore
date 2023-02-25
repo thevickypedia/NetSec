@@ -4,3 +4,5 @@ venv
 __pycache__/
 _build/
 fileio
+dist/
+NetSec.egg-info/

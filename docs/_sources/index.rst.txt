@@ -1,10 +1,10 @@
-.. NetScan documentation master file, created by
+.. NetSec documentation master file, created by
    sphinx-quickstart on Thu Aug 26 16:15:06 2021.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to NetScan's documentation!
-===================================
+Welcome to NetSec's documentation!
+==================================
 
 .. toctree::
    :maxdepth: 2
@@ -12,45 +12,45 @@ Welcome to NetScan's documentation!
 
    README
 
-NetScan
-=======
+NetSec
+======
 
-.. automodule:: analyzer
+.. automodule:: netsec.analyzer
    :members:
    :undoc-members:
 
 At&t
 ====
 
-.. automodule:: modules.att
+.. automodule:: netsec.modules.att
    :members:
    :undoc-members:
 
 Netgear
 =======
 
-.. automodule:: modules.netgear
+.. automodule:: netsec.modules.netgear
    :members:
    :undoc-members:
 
 Helper
 ======
 
-.. automodule:: modules.helper
+.. automodule:: netsec.modules.helper
    :members:
    :undoc-members:
 
 Models
 ======
 
-.. automodule:: modules.models
+.. automodule:: netsec.modules.models
    :members:
    :undoc-members:
 
 Settings
 ========
 
-.. automodule:: modules.settings
+.. automodule:: netsec.modules.settings
    :members:
    :undoc-members:
 

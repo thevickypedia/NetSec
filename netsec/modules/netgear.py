@@ -7,9 +7,9 @@ from typing import NoReturn, Union
 import yaml
 from pynetgear import Device, Netgear
 
-from modules.helper import notify
-from modules.models import DeviceStatus
-from modules.settings import LOGGER, config
+from netsec.modules.helper import notify
+from netsec.modules.models import DeviceStatus
+from netsec.modules.settings import LOGGER, config
 
 
 class LocalIPScan:
@@ -179,14 +179,15 @@ class LocalIPScan:
     def run(self, block: bool = False) -> NoReturn:
         """Trigger to initiate a Network Scan and block the devices that are not present in ``snapshot.json`` file."""
         if not os.path.isfile(config.snapshot):
-            LOGGER.error("'%s' not found. Please generate one and review it." % config.snapshot)
+            LOGGER.error("'%s' not found. Please pass `init=True` to generate "
+                         "snapshot and review it." % config.snapshot)
             raise FileNotFoundError(
                 '%s is required' % config.snapshot
             )
         with open(config.snapshot) as file:
             device_list = json.load(file)
         stored_ips = list(device_list.keys())
-        threat = ''
+        threat = []
         blocked = list(self._get_blocked())
         for device in self._get_devices():
             if device.ip and device.ip not in stored_ips:
@@ -200,12 +201,11 @@ class LocalIPScan:
                             self._dump_blocked(device=device)
                         else:
                             LOGGER.info("'%s' is a part of deny list." % device.name)
-                    threat += '\nName: {name}\nIP: {ip}\nMAC: {mac}'.format(name=device.name, ip=device.ip,
-                                                                            mac=device.mac)
+                    threat.append(dict(Name=device.name, IP=device.ip, MAC=device.mac))
                 else:
                     LOGGER.info("'%s' does not have internet access." % device.name)
 
         if threat:
-            notify(msg=threat)
+            notify(msg_dict=threat)
         else:
-            LOGGER.info('NetScan has completed. No threats found on your network.')
+            LOGGER.info('NetSec has completed. No threats found on your network.')

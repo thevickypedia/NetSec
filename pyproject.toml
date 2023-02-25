@@ -1,0 +1,50 @@
+[project]
+name = "NetSec"
+dynamic = ["version"]
+description = "Python module to analyze devices connected to the router and alert accordingly."
+readme = "README.md"
+authors = [{ name = "Vignesh Sivanandha Rao", email = "svignesh1793@gmail.com" }]
+license = { file = "LICENSE" }
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Development Status :: 5 - Production/Stable",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Topic :: System :: Networking :: Firewalls",
+    "Topic :: System :: Networking :: Monitoring :: Hardware Watchdog"
+]
+keywords = ["NetSec", "network-security", "lan", "wlan"]
+requires-python = ">=3"
+dependencies = [
+    "pynetgear==0.10.9",
+    "python-dotenv",
+    "pytz",
+    "PyYAML",
+    "requests",
+    "pandas",
+    "lxml",
+    "gmail-connector",
+    "Jinja2"
+]
+
+[tool.setuptools]
+packages = ["netsec"]
+
+[tool.setuptools.dynamic]
+version = {attr = "netsec.version"}
+
+[build-system]
+requires      = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project.optional-dependencies]
+dev = ["pytest", "pre-commit"]
+
+[project.urls]
+Homepage = "https://github.com/thevickypedia/NetSec"
+Docs = "https://thevickypedia.github.io/NetSec/"
+Source = "https://github.com/thevickypedia/NetSec"
+"Bug Tracker" = "https://github.com/thevickypedia/NetSec/issues"
+"Release Notes" = "https://github.com/thevickypedia/NetSec/blob/main/release_notes.rst"
