@@ -1,6 +1,10 @@
 Release Notes
 =============
 
+0.1.8 (02/25/2023)
+------------------
+- Add LICENSE and update README.md and bump version
+
 0.1.7 (02/25/2023)
 ------------------
 - Make `NetSec` pip installable

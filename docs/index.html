@@ -48,9 +48,12 @@
 <p class="caption" role="heading"><span class="caption-text">Read Me:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="README.html">NetSec (Network Security)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="README.html#kick-off">Kick off</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#env-variables">ENV Variables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="README.html#coding-standards">Coding Standards</a></li>
 <li class="toctree-l2"><a class="reference internal" href="README.html#release-notes">Release Notes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="README.html#linting">Linting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#pypi-package">Pypi Package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="README.html#runbook">Runbook</a></li>
 </ul>
 </li>
@@ -61,13 +64,14 @@
 <span id="netsec"></span><h1>NetSec<a class="headerlink" href="#module-netsec.analyzer" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="netsec.analyzer.network_monitor">
-<span class="sig-prename descclassname"><span class="pre">netsec.analyzer.</span></span><span class="sig-name descname"><span class="pre">network_monitor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#netsec.modules.models.SupportedModules" title="netsec.modules.models.SupportedModules"><span class="pre">SupportedModules</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="headerlink" href="#netsec.analyzer.network_monitor" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">netsec.analyzer.</span></span><span class="sig-name descname"><span class="pre">network_monitor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#netsec.modules.models.SupportedModules" title="netsec.modules.models.SupportedModules"><span class="pre">SupportedModules</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="headerlink" href="#netsec.analyzer.network_monitor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Monitor devices connected to the network.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>module</strong> – Module to scan. Currently, supports any network on a Netgear router or At&amp;t networks.</p></li>
 <li><p><strong>init</strong> – Takes a boolean value to create a snapshot file or actually monitor the network.</p></li>
+<li><p><strong>block</strong> – Takes a boolean value whether to block the intrusive device.</p></li>
 </ul>
 </dd>
 </dl>
@@ -274,6 +278,11 @@ Removes the device name from <code class="docutils literal notranslate"><span cl
 <dl class="py attribute">
 <dt class="sig sig-object py" id="netsec.modules.settings.Config.gmail_user">
 <span class="sig-name descname"><span class="pre">gmail_user</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">AnyStr</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#netsec.modules.settings.Config.gmail_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="netsec.modules.settings.Config.notification">
+<span class="sig-name descname"><span class="pre">notification</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">PathLike</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'fileio/last_notify'</span></em><a class="headerlink" href="#netsec.modules.settings.Config.notification" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
