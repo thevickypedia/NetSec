@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>Welcome to NetScan’s documentation! &#8212; NetScan  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -13,6 +13,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
@@ -42,157 +43,288 @@
           <div class="body" role="main">
             
   <section id="welcome-to-netscan-s-documentation">
-<h1>Welcome to NetScan’s documentation!<a class="headerlink" href="#welcome-to-netscan-s-documentation" title="Permalink to this headline">¶</a></h1>
+<h1>Welcome to NetScan’s documentation!<a class="headerlink" href="#welcome-to-netscan-s-documentation" title="Permalink to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Read Me:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="README.html">NetScan</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="README.html#docker-setup">Docker Setup:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#coding-standards">Coding Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#release-notes">Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#linting">Linting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#runbook">Runbook</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </section>
 <section id="module-analyzer">
-<span id="netscan"></span><h1>NetScan<a class="headerlink" href="#module-analyzer" title="Permalink to this headline">¶</a></h1>
+<span id="netscan"></span><h1>NetScan<a class="headerlink" href="#module-analyzer" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="analyzer.network_monitor">
+<span class="sig-prename descclassname"><span class="pre">analyzer.</span></span><span class="sig-name descname"><span class="pre">network_monitor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#modules.models.SupportedModules" title="modules.models.SupportedModules"><span class="pre">SupportedModules</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="headerlink" href="#analyzer.network_monitor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Monitor devices connected to the network.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>module</strong> – Module to scan. Currently, supports any network on a Netgear router or At&amp;t networks.</p></li>
+<li><p><strong>init</strong> – Takes a boolean value to create a snapshot file or actually monitor the network.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-modules.att">
+<span id="at-t"></span><h1>At&amp;t<a class="headerlink" href="#module-modules.att" title="Permalink to this heading">¶</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="analyzer.LocalIPScan">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">analyzer.</span></span><span class="sig-name descname"><span class="pre">LocalIPScan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">router_pass</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#analyzer.LocalIPScan" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="modules.att.Device">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.att.</span></span><span class="sig-name descname"><span class="pre">Device</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dictionary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.att.Device" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert dictionary into a device object.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Device</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modules.att.create_snapshot">
+<span class="sig-prename descclassname"><span class="pre">modules.att.</span></span><span class="sig-name descname"><span class="pre">create_snapshot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="headerlink" href="#modules.att.create_snapshot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a snapshot.json which is used to determine the known and unknown devices.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modules.att.format_key">
+<span class="sig-prename descclassname"><span class="pre">modules.att.</span></span><span class="sig-name descname"><span class="pre">format_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#modules.att.format_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format the key to match the Device object.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modules.att.generate_dataframe">
+<span class="sig-prename descclassname"><span class="pre">modules.att.</span></span><span class="sig-name descname"><span class="pre">generate_dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#modules.att.generate_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a dataframe using the devices information from router web page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Devices list as a data frame.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modules.att.get_attached_devices">
+<span class="sig-prename descclassname"><span class="pre">modules.att.</span></span><span class="sig-name descname"><span class="pre">get_attached_devices</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Generator</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#modules.att.Device" title="modules.att.Device"><span class="pre">Device</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#modules.att.get_attached_devices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all devices connected to the router.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Yields<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Generator[Device]</em> – Yields each device information as a Device object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modules.att.get_ipaddress">
+<span class="sig-prename descclassname"><span class="pre">modules.att.</span></span><span class="sig-name descname"><span class="pre">get_ipaddress</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#modules.att.get_ipaddress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get network id from the current IP address.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modules.att.run">
+<span class="sig-prename descclassname"><span class="pre">modules.att.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="headerlink" href="#modules.att.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trigger to initiate a Network Scan and block the devices that are not present in <code class="docutils literal notranslate"><span class="pre">snapshot.json</span></code> file.</p>
+</dd></dl>
+
+</section>
+<section id="module-modules.netgear">
+<span id="netgear"></span><h1>Netgear<a class="headerlink" href="#module-modules.netgear" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.netgear.LocalIPScan">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.netgear.</span></span><span class="sig-name descname"><span class="pre">LocalIPScan</span></span><a class="headerlink" href="#modules.netgear.LocalIPScan" title="Permalink to this definition">¶</a></dt>
 <dd><p>Connector to scan devices in the same IP range using <code class="docutils literal notranslate"><span class="pre">Netgear</span> <span class="pre">API</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">LocalIPScan</span>
 </pre></div>
 </div>
 <dl class="py method">
-<dt class="sig sig-object py" id="analyzer.LocalIPScan.allow">
-<span class="sig-name descname"><span class="pre">allow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">pynetgear.Device</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">pynetgear.Device</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#analyzer.LocalIPScan.allow" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="modules.netgear.LocalIPScan.allow">
+<span class="sig-name descname"><span class="pre">allow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Device</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Device</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#modules.netgear.LocalIPScan.allow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows internet access to a device.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>device</strong> – Takes device name or Device object as an argument.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Returns the device object received from <code class="docutils literal notranslate"><span class="pre">get_device_by_name()</span></code> method.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Device</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#modules.att.Device" title="modules.att.Device">Device</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="analyzer.LocalIPScan.always_allow">
-<span class="sig-name descname"><span class="pre">always_allow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pynetgear.Device</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="headerlink" href="#analyzer.LocalIPScan.always_allow" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="modules.netgear.LocalIPScan.always_allow">
+<span class="sig-name descname"><span class="pre">always_allow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Device</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="headerlink" href="#modules.netgear.LocalIPScan.always_allow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows internet access to a device.</p>
-<p>Saves the device name to <code class="docutils literal notranslate"><span class="pre">snapshot.json</span></code> to not block in future.
+<p>Saves the device name to <code class="docutils literal notranslate"><span class="pre">snapshot.json</span></code> to not block in the future.
 Removes the device name from <code class="docutils literal notranslate"><span class="pre">blocked.json</span></code> if an entry is present.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>device</strong> – Takes device name or Device object as an argument</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="analyzer.LocalIPScan.block">
-<span class="sig-name descname"><span class="pre">block</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">pynetgear.Device</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">pynetgear.Device</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#analyzer.LocalIPScan.block" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="modules.netgear.LocalIPScan.block">
+<span class="sig-name descname"><span class="pre">block</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Device</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Device</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#modules.netgear.LocalIPScan.block" title="Permalink to this definition">¶</a></dt>
 <dd><p>Blocks internet access to a device.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>device</strong> – Takes device name or Device object as an argument.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Returns the device object received from <code class="docutils literal notranslate"><span class="pre">get_device_by_name()</span></code> method.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Device</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#modules.att.Device" title="modules.att.Device">Device</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="analyzer.LocalIPScan.create_snapshot">
-<span class="sig-name descname"><span class="pre">create_snapshot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="headerlink" href="#analyzer.LocalIPScan.create_snapshot" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="modules.netgear.LocalIPScan.create_snapshot">
+<span class="sig-name descname"><span class="pre">create_snapshot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="headerlink" href="#modules.netgear.LocalIPScan.create_snapshot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a snapshot.json which is used to determine the known and unknown devices.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="analyzer.LocalIPScan.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">block</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="headerlink" href="#analyzer.LocalIPScan.run" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="modules.netgear.LocalIPScan.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">block</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="headerlink" href="#modules.netgear.LocalIPScan.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Trigger to initiate a Network Scan and block the devices that are not present in <code class="docutils literal notranslate"><span class="pre">snapshot.json</span></code> file.</p>
 </dd></dl>
 
 </dd></dl>
 
+</section>
+<section id="module-modules.helper">
+<span id="helper"></span><h1>Helper<a class="headerlink" href="#module-modules.helper" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="analyzer.custom_time">
-<span class="sig-prename descclassname"><span class="pre">analyzer.</span></span><span class="sig-name descname"><span class="pre">custom_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">logging.Formatter</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">time.struct_time</span></span></span><a class="headerlink" href="#analyzer.custom_time" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="modules.helper.custom_time">
+<span class="sig-prename descclassname"><span class="pre">modules.helper.</span></span><span class="sig-name descname"><span class="pre">custom_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Formatter</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">struct_time</span></span></span><a class="headerlink" href="#modules.helper.custom_time" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates custom timezone for <code class="docutils literal notranslate"><span class="pre">logging</span></code> which gets used only when invoked by <code class="docutils literal notranslate"><span class="pre">Docker</span></code>.</p>
 <p>This is used only when triggered within a <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">container</span></code> as it uses UTC timezone.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>*args</strong> – Takes <code class="docutils literal notranslate"><span class="pre">Formatter</span></code> object and current epoch time as arguments passed by <code class="docutils literal notranslate"><span class="pre">formatTime</span></code> from <code class="docutils literal notranslate"><span class="pre">logging</span></code>.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A struct_time object which is a tuple of:
 <strong>current year, month, day, hour, minute, second, weekday, year day and dst</strong> <em>(Daylight Saving Time)</em></p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>struct_time</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="analyzer.device_name">
-<span class="sig-prename descclassname"><span class="pre">analyzer.</span></span><span class="sig-name descname"><span class="pre">device_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#analyzer.device_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the device name for MacOS and Windows.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="analyzer.extract_str">
-<span class="sig-prename descclassname"><span class="pre">analyzer.</span></span><span class="sig-name descname"><span class="pre">extract_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">AnyStr</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#analyzer.extract_str" title="Permalink to this definition">¶</a></dt>
-<dd><p>Extracts strings from the received input.</p>
+<dt class="sig sig-object py" id="modules.helper.notify">
+<span class="sig-prename descclassname"><span class="pre">modules.helper.</span></span><span class="sig-name descname"><span class="pre">notify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="headerlink" href="#modules.helper.notify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send an email notification when there is a threat.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>input_</strong> – Takes a string as argument.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A string after removing special characters.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="analyzer.get_ssid">
-<span class="sig-prename descclassname"><span class="pre">analyzer.</span></span><span class="sig-name descname"><span class="pre">get_ssid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#analyzer.get_ssid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks the current operating system and runs the appropriate command to get the SSID of the access point.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>SSID of the access point/router which is being accessed.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="analyzer.send_sms">
-<span class="sig-prename descclassname"><span class="pre">analyzer.</span></span><span class="sig-name descname"><span class="pre">send_sms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="headerlink" href="#analyzer.send_sms" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sens an SMS notification when invoked by the <code class="docutils literal notranslate"><span class="pre">run</span></code> method.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>msg</strong> – Message that has to be sent.</p>
 </dd>
 </dl>
 </dd></dl>
 
 </section>
+<section id="module-modules.models">
+<span id="models"></span><h1>Models<a class="headerlink" href="#module-modules.models" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.models.DeviceStatus">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.models.</span></span><span class="sig-name descname"><span class="pre">DeviceStatus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.models.DeviceStatus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Device status strings for allow or block.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.models.DeviceStatus.allow">
+<span class="sig-name descname"><span class="pre">allow</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Allow'</span></em><a class="headerlink" href="#modules.models.DeviceStatus.allow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.models.DeviceStatus.block">
+<span class="sig-name descname"><span class="pre">block</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Block'</span></em><a class="headerlink" href="#modules.models.DeviceStatus.block" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.models.SupportedModules">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.models.</span></span><span class="sig-name descname"><span class="pre">SupportedModules</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.models.SupportedModules" title="Permalink to this definition">¶</a></dt>
+<dd><p>Supported modules are At&amp;t and Netgear.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.models.SupportedModules.att">
+<span class="sig-name descname"><span class="pre">att</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'At&amp;t'</span></em><a class="headerlink" href="#modules.models.SupportedModules.att" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.models.SupportedModules.netgear">
+<span class="sig-name descname"><span class="pre">netgear</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Netgear'</span></em><a class="headerlink" href="#modules.models.SupportedModules.netgear" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-modules.settings">
+<span id="settings"></span><h1>Settings<a class="headerlink" href="#module-modules.settings" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.settings.Config">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.settings.</span></span><span class="sig-name descname"><span class="pre">Config</span></span><a class="headerlink" href="#modules.settings.Config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper for all the environment variables.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.settings.Config.blocked">
+<span class="sig-name descname"><span class="pre">blocked</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'fileio/blocked.yaml'</span></em><a class="headerlink" href="#modules.settings.Config.blocked" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.settings.Config.docker">
+<span class="sig-name descname"><span class="pre">docker</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#modules.settings.Config.docker" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.settings.Config.gmail_pass">
+<span class="sig-name descname"><span class="pre">gmail_pass</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#modules.settings.Config.gmail_pass" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.settings.Config.gmail_user">
+<span class="sig-name descname"><span class="pre">gmail_user</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#modules.settings.Config.gmail_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.settings.Config.phone">
+<span class="sig-name descname"><span class="pre">phone</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#modules.settings.Config.phone" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.settings.Config.recipient">
+<span class="sig-name descname"><span class="pre">recipient</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#modules.settings.Config.recipient" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.settings.Config.router_pass">
+<span class="sig-name descname"><span class="pre">router_pass</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#modules.settings.Config.router_pass" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.settings.Config.snapshot">
+<span class="sig-name descname"><span class="pre">snapshot</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'fileio/snapshot.json'</span></em><a class="headerlink" href="#modules.settings.Config.snapshot" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
 <section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">¶</a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
@@ -207,16 +339,25 @@ Removes the device name from <code class="docutils literal notranslate"><span cl
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="#">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="#">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Welcome to NetScan’s documentation!</a></li>
 <li><a class="reference internal" href="#module-analyzer">NetScan</a></li>
+<li><a class="reference internal" href="#module-modules.att">At&amp;t</a></li>
+<li><a class="reference internal" href="#module-modules.netgear">Netgear</a></li>
+<li><a class="reference internal" href="#module-modules.helper">Helper</a></li>
+<li><a class="reference internal" href="#module-modules.models">Models</a></li>
+<li><a class="reference internal" href="#module-modules.settings">Settings</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 
-  <h4>Next topic</h4>
-  <p class="topless"><a href="README.html"
-                        title="next chapter">NetScan</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="README.html"
+                          title="next chapter">NetScan</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -233,7 +374,7 @@ Removes the device name from <code class="docutils literal notranslate"><span cl
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -256,7 +397,7 @@ Removes the device name from <code class="docutils literal notranslate"><span cl
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, Vignesh Sivanandha Rao.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
     </div>
   </body>
 </html>

@@ -1,23 +1,48 @@
 # NetScan
 Network Scanner to analyze devices connecting to the router and alert accordingly.
 
-NetScan displays the connected devices, Wi-Fi signal info, speed, etc.
-
-This app can display intruders IP addresses, MAC addresses, and lets the user Ping the device, and even Block user from
-Wi-Fi.
+This app can display intruders' IP addresses, MAC addresses, and lets the user Ping the device, and even Block the device.
 
 Block IP Address feature helps the user to remove the specified connections and block the specific IP address.
 
-### Docker Setup:
+> Blocking device feature is currently available only for `Netgear` router users.
 
-###### Commands:
-- `docker build --progress plain -t netscan .`
-- `docker run netscan`
+```python
 
-[Additional options that can be added to the `docker build` command.](https://docs.docker.com/engine/reference/commandline/build/#options)
+```
 
-###### [Reference](https://github.com/MatMaul/pynetgear)
 
-###### [Runbook](https://thevickypedia.github.io/netscan/)
+## Coding Standards
+Docstring format: [`Google`](https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings) <br>
+Styling conventions: [`PEP 8`](https://www.python.org/dev/peps/pep-0008/) <br>
+Clean code with pre-commit hooks: [`flake8`](https://flake8.pycqa.org/en/latest/) and 
+[`isort`](https://pycqa.github.io/isort/)
 
-###### [Repository](https://github.com/thevickypedia/netscan)
+## [Release Notes](https://github.com/thevickypedia/Jarvis/blob/master/release_notes.rst)
+**Requirement**
+```shell
+python -m pip install changelog-generator
+```
+
+**Usage**
+```shell
+changelog reverse -f release_notes.rst -t 'Release Notes'
+```
+
+## Linting
+`PreCommit` will ensure linting, and the doc creation are run on every commit.
+
+**Requirement**
+```shell
+pip install sphinx==5.1.1 pre-commit recommonmark
+```
+
+**Usage**
+```shell
+pre-commit run --all-files
+```
+
+## Runbook
+[![made-with-sphinx-doc](https://img.shields.io/badge/Code%20Docs-Sphinx-1f425f.svg)](https://www.sphinx-doc.org/en/master/man/sphinx-autogen.html)
+
+[https://thevickypedia.github.io/netscan/](https://thevickypedia.github.io/netscan/)

@@ -1,7 +1,6 @@
 .env
-*.yaml
-*.json
 .idea
 venv
-__pycache__
-build
+__pycache__/
+_build/
+fileio

@@ -1,8 +1,8 @@
+pynetgear==0.10.9
+python-dotenv
+pytz
+PyYAML
+requests
+pandas
+lxml
 gmail-connector
-pynetgear==0.7.0
-python_dotenv==0.20.0
-PyYAML==5.4.1
-pytz==2021.1
-Sphinx==4.1.2
-recommonmark==0.7.1
-pre-commit==2.14.0

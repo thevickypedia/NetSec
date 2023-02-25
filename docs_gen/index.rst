@@ -19,6 +19,41 @@ NetScan
    :members:
    :undoc-members:
 
+At&t
+====
+
+.. automodule:: modules.att
+   :members:
+   :undoc-members:
+
+Netgear
+=======
+
+.. automodule:: modules.netgear
+   :members:
+   :undoc-members:
+
+Helper
+======
+
+.. automodule:: modules.helper
+   :members:
+   :undoc-members:
+
+Models
+======
+
+.. automodule:: modules.models
+   :members:
+   :undoc-members:
+
+Settings
+========
+
+.. automodule:: modules.settings
+   :members:
+   :undoc-members:
+
 Indices and tables
 ==================
 

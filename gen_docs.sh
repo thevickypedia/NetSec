@@ -4,6 +4,6 @@
 set -e
 rm -rf docs
 mkdir docs
-mkdir -p doc_generator/_static  # creates a _static folder if unavailable
-cp README.md doc_generator && cd doc_generator && make clean html && mv _build/html/* ../docs && rm README.md
+mkdir -p docs_gen/_static  # creates a _static folder if unavailable
+cp README.md docs_gen && cd docs_gen && make clean html && mv _build/html/* ../docs && rm README.md
 touch ../docs/.nojekyll
