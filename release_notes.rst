@@ -1,6 +1,11 @@
 Release Notes
 =============
 
+0.1.9 (04/03/2023)
+------------------
+- Raise exception for missing router_pass in NetGear
+- Upgrade gmail-connector and references
+
 0.1.8 (02/25/2023)
 ------------------
 - Add LICENSE and update README.md and bump version

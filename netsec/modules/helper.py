@@ -5,13 +5,12 @@ from typing import Dict, List, NoReturn
 
 import gmailconnector
 import jinja2
-from gmailconnector.responder import Response
 
 from netsec.modules.settings import LOGGER, config
 
 
-def _log_response(response: Response) -> NoReturn:
-    """Log response from gmailconnector."""
+def _log_response(response: gmailconnector.Response) -> NoReturn:
+    """Log response from gmail-connector."""
     if response.ok:
         LOGGER.info(response.body)
         return True

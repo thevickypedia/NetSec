@@ -1,6 +1,6 @@
 from typing import NoReturn
 
-from gmailconnector.validator import address as email_address
+import gmailconnector
 
 from netsec.modules import att, models, netgear, settings
 
@@ -14,9 +14,12 @@ def network_monitor(module: models.SupportedModules, init: bool = True, block: b
         block: Takes a boolean value whether to block the intrusive device.
     """
     if settings.config.recipient:
-        email_address.logger = settings.LOGGER
-        settings.config.recipient = email_address.ValidateAddress(address=settings.config.recipient)  # noqa
+        settings.config.recipient = gmailconnector.EmailAddress(address=settings.config.recipient)
     if module == models.SupportedModules.netgear:
+        if not settings.config.router_pass:
+            raise ValueError(
+                "\n\n'router_pass' is required for NetGear routers"
+            )
         if init:
             netgear.LocalIPScan().create_snapshot()
         else:
