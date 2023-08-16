@@ -7,7 +7,7 @@ import dotenv
 dotenv.load_dotenv(dotenv_path=".env")
 
 if not os.path.isdir('fileio'):
-    os.makedirs('fileio')
+    os.mkdir('fileio')
 
 LOGGER = logging.getLogger(__name__)
 handler = logging.StreamHandler()

@@ -3,13 +3,13 @@ import time
 from datetime import datetime
 from typing import Dict, List, NoReturn
 
-import gmailconnector
+import gmailconnector as gc
 import jinja2
 
 from netsec.modules.settings import LOGGER, config
 
 
-def _log_response(response: gmailconnector.Response) -> NoReturn:
+def _log_response(response: gc.Response) -> NoReturn:
     """Log response from gmail-connector."""
     if response.ok:
         LOGGER.info(response.body)
@@ -28,16 +28,20 @@ def notify(msg_dict: List[Dict[str, str]]) -> NoReturn:
         return
     if os.path.isfile(config.notification):
         with open(config.notification) as file:
-            updated = file.read()
-        if updated and time.time() - float(updated) < 3_600:
+            try:
+                updated = float(file.read().strip())
+            except ValueError:
+                updated = None
+        if updated and time.time() - updated < 3_600:
             LOGGER.info("Last notification was sent within an hour.")
             return
+    msg_dict = [{key: value for key, value in sorted(d.items(), key=lambda item: len(item[0]))} for d in msg_dict]
     sub = f"NetSec Alert - {datetime.now().strftime('%c')}"
     if config.recipient:
         with open(os.path.join(os.path.dirname(__file__), 'email_template.html')) as file:
             template = jinja2.Template(file.read())
         rendered = template.render(alerts=msg_dict)
-        emailer = gmailconnector.SendEmail(gmail_user=config.gmail_user, gmail_pass=config.gmail_pass)
+        emailer = gc.SendEmail(gmail_user=config.gmail_user, gmail_pass=config.gmail_pass)
         response = emailer.send_email(recipient=config.recipient.email, sender="NetSec",
                                       subject=sub, html_body=rendered)
         if _log_response(response=response):
@@ -49,7 +53,7 @@ def notify(msg_dict: List[Dict[str, str]]) -> NoReturn:
             for key, value in part.items():
                 msg += "%s: %s\n" % (key, value)
             msg += "\n"
-        messenger = gmailconnector.SendSMS(gmail_user=config.gmail_user, gmail_pass=config.gmail_pass)
+        messenger = gc.SendSMS(gmail_user=config.gmail_user, gmail_pass=config.gmail_pass)
         response = messenger.send_sms(message=msg, subject=sub)
         if _log_response(response=response):
             with open(config.notification, 'w') as file:

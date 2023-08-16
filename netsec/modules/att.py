@@ -4,9 +4,8 @@ import socket
 from collections.abc import Generator
 from typing import Any, NoReturn, Optional, Union
 
-import pandas
+import pandas as pd
 import requests
-from pandas import DataFrame
 
 from netsec.modules.helper import notify
 from netsec.modules.settings import LOGGER, config
@@ -57,14 +56,14 @@ class Device:
             setattr(self, key, dictionary[key])
 
 
-def generate_dataframe() -> DataFrame:
+def generate_dataframe() -> pd.DataFrame:
     """Generate a dataframe using the devices information from router web page.
 
     Returns:
-        DataFrame:
+        pd.DataFrame:
         Devices list as a data frame.
     """
-    # pandas.set_option('display.max_rows', None)
+    # pd.set_option('display.max_rows', None)
     try:
         response = requests.get(url=SOURCE)
     except requests.RequestException as error:
@@ -74,7 +73,7 @@ def generate_dataframe() -> DataFrame:
         if response.ok:
             html_source = response.text
             try:
-                html_tables = pandas.read_html(html_source)
+                html_tables = pd.read_html(html_source)
             except ImportError:
                 raise ValueError("No tables found")
             return html_tables[0]

@@ -57,12 +57,12 @@ Clean code with pre-commit hooks: [`flake8`](https://flake8.pycqa.org/en/latest/
 ## [Release Notes](https://github.com/thevickypedia/NetSec/blob/master/release_notes.rst)
 **Requirement**
 ```shell
-python -m pip install changelog-generator
+python -m pip install gitverse
 ```
 
 **Usage**
 ```shell
-changelog reverse -f release_notes.rst -t 'Release Notes'
+gitverse-release reverse -f release_notes.rst -t 'Release Notes'
 ```
 
 ## Linting
@@ -87,3 +87,9 @@ pre-commit run --all-files
 [![made-with-sphinx-doc](https://img.shields.io/badge/Code%20Docs-Sphinx-1f425f.svg)](https://www.sphinx-doc.org/en/master/man/sphinx-autogen.html)
 
 [https://thevickypedia.github.io/NetSec/](https://thevickypedia.github.io/NetSec/)
+
+## License & copyright
+
+&copy; Vignesh Rao, NetSec
+
+Licensed under the [MIT License](https://github.com/thevickypedia/NetSec/blob/main/LICENSE)

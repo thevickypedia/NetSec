@@ -1,11 +1,13 @@
 from typing import NoReturn
 
-import gmailconnector
+import gmailconnector as gc
 
 from netsec.modules import att, models, netgear, settings
 
 
-def network_monitor(module: models.SupportedModules, init: bool = True, block: bool = False) -> NoReturn:
+def network_monitor(module: models.SupportedModules,
+                    init: bool = True,
+                    block: bool = False) -> NoReturn:
     """Monitor devices connected to the network.
 
     Args:
@@ -14,7 +16,7 @@ def network_monitor(module: models.SupportedModules, init: bool = True, block: b
         block: Takes a boolean value whether to block the intrusive device.
     """
     if settings.config.recipient:
-        settings.config.recipient = gmailconnector.EmailAddress(address=settings.config.recipient)
+        settings.config.recipient = gc.EmailAddress(address=str(settings.config.recipient))
     if module == models.SupportedModules.netgear:
         if not settings.config.router_pass:
             raise ValueError(

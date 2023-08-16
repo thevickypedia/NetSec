@@ -1,0 +1,9 @@
+pynetgear==0.10.9
+python-dotenv
+pytz
+PyYAML
+requests
+pandas
+lxml
+gmail-connector
+Jinja2

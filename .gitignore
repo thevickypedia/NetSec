@@ -1,8 +1,9 @@
 .env
 .idea
 venv
-__pycache__/
-_build/
-fileio
+
 dist/
+_build/
+fileio/
+__pycache__/
 NetSec.egg-info/

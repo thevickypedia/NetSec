@@ -177,7 +177,11 @@ class LocalIPScan:
                 yaml.dump(blocked_devices, file, indent=2)
 
     def run(self, block: bool = False) -> NoReturn:
-        """Trigger to initiate a Network Scan and block the devices that are not present in ``snapshot.json`` file."""
+        """Trigger to initiate a Network Scan and block the devices that are not present in ``snapshot.json`` file.
+
+        Args:
+            block: Blocks internet access to the device. _only for netgear routers_
+        """
         if not os.path.isfile(config.snapshot):
             LOGGER.error("'%s' not found. Please pass `init=True` to generate "
                          "snapshot and review it." % config.snapshot)

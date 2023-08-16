@@ -1,6 +1,6 @@
 [project]
 name = "NetSec"
-dynamic = ["version"]
+dynamic = ["version", "dependencies"]
 description = "Python module to analyze devices connected to the router and alert accordingly."
 readme = "README.md"
 authors = [{ name = "Vignesh Sivanandha Rao", email = "svignesh1793@gmail.com" }]
@@ -16,31 +16,21 @@ classifiers = [
     "Topic :: System :: Networking :: Monitoring :: Hardware Watchdog"
 ]
 keywords = ["NetSec", "network-security", "lan", "wlan"]
-requires-python = ">=3"
-dependencies = [
-    "pynetgear==0.10.9",
-    "python-dotenv",
-    "pytz",
-    "PyYAML",
-    "requests",
-    "pandas",
-    "lxml",
-    "gmail-connector",
-    "Jinja2"
-]
+requires-python = ">=3.8"
 
 [tool.setuptools]
 packages = ["netsec"]
 
 [tool.setuptools.dynamic]
 version = {attr = "netsec.version"}
+dependencies = {file = ["netsec/requirements.txt"]}
 
 [build-system]
 requires      = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project.optional-dependencies]
-dev = ["pytest", "pre-commit"]
+dev = ["sphinx==5.1.1", "pre-commit", "recommonmark", "gitverse"]
 
 [project.urls]
 Homepage = "https://github.com/thevickypedia/NetSec"
